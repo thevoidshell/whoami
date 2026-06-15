@@ -59,7 +59,6 @@ export async function getPortfolioTopics(): Promise<string[]> {
     });
 
     return [...topicScores.entries()]
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 10)
-        .map(([topic]) => topic);
+    .sort((a, b) => b[1] - a[1])
+    .map(([topic, score]) => `${topic} (${score})`);
 }

@@ -1,7 +1,7 @@
 import { getPortfolioTopics } from "@/lib/github";
 
 export default async function AboutPage() {
-    
+
     const focusAreas = await getPortfolioTopics();
 
     return (
