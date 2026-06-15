@@ -1,4 +1,5 @@
 import { getPortfolioTopics } from "@/lib/github";
+import { socials } from "@/data/socials";
 
 export default async function AboutPage() {
 
@@ -45,7 +46,6 @@ export default async function AboutPage() {
                             "System Hardening",
                             "Malware Analysis",
                             "Threat Detection",
-                            "Python",
                             "Git",
                             "Technical Documentation"
                         ].map((skill) => (
@@ -76,6 +76,47 @@ export default async function AboutPage() {
                     </div>
                 </section>
 
+                <section className="mt-12">
+                    <h2 className="text-2xl font-bold mb-4">
+                        Connect
+                    </h2>
+
+                    <div className="flex flex-wrap gap-3">
+                        <a
+                            href={socials.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-3 py-2 border rounded hover:bg-white hover:text-black transition"
+                        >
+                            GitHub
+                        </a>
+
+                        <a
+                            href={socials.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-3 py-2 border rounded hover:bg-white hover:text-black transition"
+                        >
+                            LinkedIn
+                        </a>
+
+                        <a
+                            href={socials.email}
+                            className="px-3 py-2 border rounded hover:bg-white hover:text-black transition"
+                        >
+                            Email
+                        </a>
+
+                        <a
+                            href={socials.discord}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-3 py-2 border rounded hover:bg-white hover:text-black transition"
+                        >
+                            Discord
+                        </a>
+                    </div>
+                </section>
             </div>
         </main>
     );
