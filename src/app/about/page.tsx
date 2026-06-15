@@ -106,15 +106,6 @@ export default async function AboutPage() {
                         >
                             Email
                         </a>
-
-                        <a
-                            href={socials.discord}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-3 py-2 border rounded hover:bg-white hover:text-black transition"
-                        >
-                            Discord
-                        </a>
                     </div>
                 </section>
             </div>
