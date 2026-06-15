@@ -12,7 +12,7 @@ export async function getRepos() {
     return response.json();
 }
 
-export async function getPortfolioTopics() {
+export async function getPortfolioTopics(): Promise<string[]> {
     const repos = await getRepos();
 
     const portfolioRepos = repos.filter(
@@ -20,13 +20,46 @@ export async function getPortfolioTopics() {
             repo.topics?.includes("thevoidshell")
     );
 
-    const topics: string[] = portfolioRepos.flatMap(
-        (repo: any) => repo.topics || []
-    );
+    const topicScores = new Map<string, number>();
 
-    return [...new Set<string>(topics)].filter(
-        (topic) =>
-            topic !== "thevoidshell" &&
-            topic !== "featured"
-    );
+    portfolioRepos.forEach((repo: any) => {
+        const updatedAt = new Date(repo.updated_at);
+        const now = new Date();
+
+        const daysSinceUpdate =
+            (now.getTime() - updatedAt.getTime()) /
+            (1000 * 60 * 60 * 24);
+
+        let recencyWeight = 1;
+
+        if (daysSinceUpdate <= 30) {
+            recencyWeight = 5;
+        } else if (daysSinceUpdate <= 90) {
+            recencyWeight = 4;
+        } else if (daysSinceUpdate <= 180) {
+            recencyWeight = 3;
+        } else if (daysSinceUpdate <= 365) {
+            recencyWeight = 2;
+        }
+
+        repo.topics?.forEach((topic: string) => {
+            if (
+                topic === "thevoidshell" ||
+                topic === "featured"
+            ) {
+                return;
+            }
+
+            topicScores.set(
+                topic,
+                (topicScores.get(topic) || 0) +
+                recencyWeight
+            );
+        });
+    });
+
+    return [...topicScores.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10)
+        .map(([topic]) => topic);
 }
