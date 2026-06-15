@@ -34,3 +34,9 @@ export default function RootLayout({
     </html>
   );
 }
+
+<footer className="border-t border-gray-800 mt-16">
+    <div className="max-w-4xl mx-auto px-8 py-6 text-sm text-gray-400">
+        Rachel Gupta • Cybersecurity Student • Built with Next.js
+    </div>
+</footer>
