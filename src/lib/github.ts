@@ -11,3 +11,22 @@ export async function getRepos() {
 
     return response.json();
 }
+
+export async function getPortfolioTopics() {
+    const repos = await getRepos();
+
+    const portfolioRepos = repos.filter(
+        (repo: any) =>
+            repo.topics?.includes("thevoidshell")
+    );
+
+    const topics: string[] = portfolioRepos.flatMap(
+        (repo: any) => repo.topics || []
+    );
+
+    return [...new Set<string>(topics)].filter(
+        (topic) =>
+            topic !== "thevoidshell" &&
+            topic !== "featured"
+    );
+}

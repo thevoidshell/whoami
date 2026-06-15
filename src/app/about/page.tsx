@@ -1,4 +1,9 @@
-export default function AboutPage() {
+import { getPortfolioTopics } from "@/lib/github";
+
+export default async function AboutPage() {
+    
+    const focusAreas = await getPortfolioTopics();
+
     return (
         <main className="min-h-screen p-8">
             <div className="max-w-4xl mx-auto">
@@ -56,27 +61,16 @@ export default function AboutPage() {
 
                 <section>
                     <h2 className="text-2xl font-bold mb-4">
-                        Tech Stack
+                        Technical Focus Areas
                     </h2>
 
                     <div className="flex flex-wrap gap-2">
-                        {[
-                            "Python",
-                            "TypeScript",
-                            "JavaScript",
-                            "HTML",
-                            "CSS",
-                            "Linux",
-                            "Git",
-                            "GitHub",
-                            "Next.js",
-                            "Tailwind"
-                        ].map((tech) => (
+                        {focusAreas.map((topic: string) => (
                             <span
-                                key={tech}
+                                key={topic}
                                 className="px-3 py-2 border rounded"
                             >
-                                {tech}
+                                {topic}
                             </span>
                         ))}
                     </div>
