@@ -1,10 +1,8 @@
-# The Void Shell Portfolio
+# thevoidshell Portfolio
 
 A modern cybersecurity portfolio built with Next.js that automatically synchronizes projects, technical focus areas, and technology stack directly from GitHub.
 
 The goal of this project is to create a portfolio that functions as a live representation of my technical ecosystem rather than a separate website requiring constant manual updates.
-
----
 
 ## Features
 
@@ -14,8 +12,6 @@ The goal of this project is to create a portfolio that functions as a live repre
 * Supports both public and private repositories through authenticated requests
 * Caches repository data for efficient server-side rendering
 * Automatically updates when new projects are added or existing projects evolve
-
----
 
 ### Project Management System
 
@@ -51,8 +47,6 @@ Add GitHub Topics
 Portfolio Updates Automatically
 ```
 
----
-
 ### Automated Technical Profile
 
 The About page is generated using repository metadata.
@@ -70,8 +64,6 @@ This ensures current areas of work appear before older interests.
 
 Programming languages are aggregated from GitHub language statistics across portfolio repositories.
 
----
-
 ## Technology Stack
 
 ### Frontend
@@ -86,8 +78,6 @@ Programming languages are aggregated from GitHub language statistics across port
 * Vercel deployment
 * GitHub REST API
 * Environment-based authentication using GitHub Personal Access Tokens
-
----
 
 ## Local Development
 
@@ -122,38 +112,14 @@ Start the development server:
 npm run dev
 ```
 
----
-
 ## Environment Variables
 
 | Variable     | Purpose                                                                      |
 | ------------ | ---------------------------------------------------------------------------- |
 | GITHUB_TOKEN | Authenticates GitHub API requests and enables access to private repositories |
 
----
-
 ## Deployment
 
 The website is deployed using Vercel.
 
 Production environment variables are configured through the Vercel dashboard.
-
----
-
-## Future Development
-
-Planned improvements include:
-
-* Terminal-based portfolio interface
-* Enhanced UI/UX and animations
-* GitHub activity visualization
-* Additional cybersecurity project writeups
-* Custom domain integration
-
----
-
-## Design Philosophy
-
-The portfolio follows a minimalist, content-focused design.
-
-The goal is to emphasize engineering work, documentation, and technical growth rather than relying on excessive visual effects or stereotypical "hacker" aesthetics.
