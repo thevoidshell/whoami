@@ -1,33 +1,86 @@
-export async function getRepos() {
-    const response = await fetch(
-        "https://api.github.com/users/thevoidshell/repos?per_page=100",
-        {
-            headers: {
-                Accept: "application/vnd.github+json",
-            },
-            next: { revalidate: 3600 },
-        }
-    );
+type Repository = {
+    name: string;
+    topics?: string[];
+    updated_at: string;
+    languages_url: string;
+    languages: Record<string, number>;
+};
 
-    return response.json();
+let cachedRepositories: Promise<Repository[]> | null = null;
+
+
+export async function getRepos(): Promise<Repository[]> {
+    if (cachedRepositories) {
+        return cachedRepositories;
+    }
+
+    cachedRepositories = (async () => {
+        const repositoryResponse = await fetch(
+            "https://api.github.com/user/repos?per_page=100",
+            {
+                headers: {
+                    Accept: "application/vnd.github+json",
+                    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+                },
+                next: { revalidate: 3600 },
+            }
+        );
+
+        if (!repositoryResponse.ok) {
+            throw new Error("Failed to fetch GitHub repositories");
+        }
+
+        const repositories = await repositoryResponse.json();
+
+        const repositoriesWithLanguages = await Promise.all(
+            repositories.map(async (repository: Repository) => {
+                const languageResponse = await fetch(
+                    repository.languages_url,
+                    {
+                        headers: {
+                            Accept: "application/vnd.github+json",
+                            Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+                        },
+                        next: { revalidate: 3600 },
+                    }
+                );
+
+                if (!languageResponse.ok) {
+                    return {
+                        ...repository,
+                        languages: {},
+                    };
+                }
+
+                const languageStatistics = await languageResponse.json();
+
+                return {
+                    ...repository,
+                    languages: languageStatistics,
+                };
+            })
+        );
+
+        return repositoriesWithLanguages;
+    })();
+
+    return cachedRepositories;
 }
 
-export async function getPortfolioTopics(): Promise<string[]> {
-    const repos = await getRepos();
 
-    const portfolioRepos = repos.filter(
-        (repo: any) =>
-            repo.topics?.includes("thevoidshell")
+export async function getPortfolioTopics(): Promise<string[]> {
+    const repositories = await getRepos();
+
+    const portfolioRepositories = repositories.filter(
+        (repository) =>
+            repository.topics?.includes("thevoidshell")
     );
 
     const topicScores = new Map<string, number>();
 
-    portfolioRepos.forEach((repo: any) => {
-        const updatedAt = new Date(repo.updated_at);
-        const now = new Date();
-
+    portfolioRepositories.forEach((repository) => {
         const daysSinceUpdate =
-            (now.getTime() - updatedAt.getTime()) /
+            (Date.now() - new Date(repository.updated_at).getTime()) /
             (1000 * 60 * 60 * 24);
 
         let recencyWeight = 1;
@@ -42,7 +95,7 @@ export async function getPortfolioTopics(): Promise<string[]> {
             recencyWeight = 2;
         }
 
-        repo.topics?.forEach((topic: string) => {
+        repository.topics?.forEach((topic) => {
             if (
                 topic === "thevoidshell" ||
                 topic === "featured"
@@ -52,8 +105,7 @@ export async function getPortfolioTopics(): Promise<string[]> {
 
             topicScores.set(
                 topic,
-                (topicScores.get(topic) || 0) +
-                recencyWeight
+                (topicScores.get(topic) || 0) + recencyWeight
             );
         });
     });
@@ -64,39 +116,27 @@ export async function getPortfolioTopics(): Promise<string[]> {
         .map(([topic]) => topic);
 }
 
-export async function getTechStack(): Promise<string[]> {
-    const repos = await getRepos();
 
-    const portfolioRepos = repos.filter(
-        (repo: any) =>
-            repo.topics?.includes("thevoidshell")
+export async function getTechStack(): Promise<string[]> {
+    const repositories = await getRepos();
+
+    const portfolioRepositories = repositories.filter(
+        (repository) =>
+            repository.topics?.includes("thevoidshell")
     );
 
     const languageTotals = new Map<string, number>();
 
-    for (const repo of portfolioRepos) {
-        const response = await fetch(
-            repo.languages_url,
-            {
-                headers: {
-                    Accept: "application/vnd.github+json",
-                },
-                next: { revalidate: 3600 },
-            }
-        );
-
-        const languages = await response.json();
-
-        Object.entries(languages).forEach(
+    portfolioRepositories.forEach((repository) => {
+        Object.entries(repository.languages).forEach(
             ([language, bytes]) => {
                 languageTotals.set(
                     language,
-                    (languageTotals.get(language) || 0) +
-                    Number(bytes)
+                    (languageTotals.get(language) || 0) + Number(bytes)
                 );
             }
         );
-    }
+    });
 
     return [...languageTotals.entries()]
         .sort((a, b) => b[1] - a[1])
