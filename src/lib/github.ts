@@ -1,6 +1,9 @@
-type Repository = {
+export interface Repository {
+    id: number;
     name: string;
-    topics?: string[];
+    description: string | null;
+    html_url: string;
+    topics: string[];
     updated_at: string;
     languages_url: string;
     languages: Record<string, number>;
