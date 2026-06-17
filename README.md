@@ -1,36 +1,159 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Void Shell Portfolio
 
-## Getting Started
+A modern cybersecurity portfolio built with Next.js that automatically synchronizes projects, technical focus areas, and technology stack directly from GitHub.
 
-First, run the development server:
+The goal of this project is to create a portfolio that functions as a live representation of my technical ecosystem rather than a separate website requiring constant manual updates.
+
+---
+
+## Features
+
+### Dynamic GitHub Integration
+
+* Automatically retrieves repositories using the GitHub REST API
+* Supports both public and private repositories through authenticated requests
+* Caches repository data for efficient server-side rendering
+* Automatically updates when new projects are added or existing projects evolve
+
+---
+
+### Project Management System
+
+Projects are managed entirely through GitHub topics.
+
+**Portfolio projects**
+
+Repositories tagged with:
+
+```
+thevoidshell
+```
+
+automatically appear on the Projects page.
+
+**Featured projects**
+
+Repositories tagged with:
+
+```
+featured
+```
+
+are prioritized and displayed on the homepage.
+
+This workflow allows new projects to be added without modifying website code.
+
+```
+Create Repository
+        ↓
+Add GitHub Topics
+        ↓
+Portfolio Updates Automatically
+```
+
+---
+
+### Automated Technical Profile
+
+The About page is generated using repository metadata.
+
+#### Technical Focus Areas
+
+Repository topics are analyzed using a weighted scoring system based on:
+
+* Topic frequency across projects
+* Repository recency
+
+This ensures current areas of work appear before older interests.
+
+#### Technology Stack
+
+Programming languages are aggregated from GitHub language statistics across portfolio repositories.
+
+---
+
+## Technology Stack
+
+### Frontend
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+
+### Infrastructure
+
+* Vercel deployment
+* GitHub REST API
+* Environment-based authentication using GitHub Personal Access Tokens
+
+---
+
+## Local Development
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+cd portfolio
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a local environment file:
+
+```
+.env.local
+```
+
+Add the required environment variable:
+
+```env
+GITHUB_TOKEN=your_github_personal_access_token
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable     | Purpose                                                                      |
+| ------------ | ---------------------------------------------------------------------------- |
+| GITHUB_TOKEN | Authenticates GitHub API requests and enables access to private repositories |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The website is deployed using Vercel.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Production environment variables are configured through the Vercel dashboard.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Future Development
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Planned improvements include:
+
+* Terminal-based portfolio interface
+* Enhanced UI/UX and animations
+* GitHub activity visualization
+* Additional cybersecurity project writeups
+* Custom domain integration
+
+---
+
+## Design Philosophy
+
+The portfolio follows a minimalist, content-focused design.
+
+The goal is to emphasize engineering work, documentation, and technical growth rather than relying on excessive visual effects or stereotypical "hacker" aesthetics.
