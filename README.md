@@ -13,8 +13,6 @@ The goal of this project is to create a portfolio that functions as a live repre
 * Caches repository data for efficient server-side rendering
 * Automatically updates when new projects are added or existing projects evolve
 
----
-
 ### Project Management System
 
 Projects are managed entirely through GitHub topics.
@@ -49,8 +47,6 @@ Add GitHub Topics
 Portfolio Updates Automatically
 ```
 
----
-
 ### Automated Technical Profile
 
 The About page is generated using repository metadata.
@@ -68,8 +64,6 @@ This ensures current areas of work appear before older interests.
 
 Programming languages are aggregated from GitHub language statistics across portfolio repositories.
 
----
-
 ## Technology Stack
 
 ### Frontend
@@ -84,8 +78,6 @@ Programming languages are aggregated from GitHub language statistics across port
 * Vercel deployment
 * GitHub REST API
 * Environment-based authentication using GitHub Personal Access Tokens
-
----
 
 ## Local Development
 
@@ -120,15 +112,11 @@ Start the development server:
 npm run dev
 ```
 
----
-
 ## Environment Variables
 
 | Variable     | Purpose                                                                      |
 | ------------ | ---------------------------------------------------------------------------- |
 | GITHUB_TOKEN | Authenticates GitHub API requests and enables access to private repositories |
-
----
 
 ## Deployment
 
