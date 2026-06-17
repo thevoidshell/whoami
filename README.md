@@ -1,4 +1,4 @@
-# The Void Shell Portfolio
+# thevoidshell Portfolio
 
 A modern cybersecurity portfolio built with Next.js that automatically synchronizes projects, technical focus areas, and technology stack directly from GitHub.
 
@@ -137,23 +137,3 @@ npm run dev
 The website is deployed using Vercel.
 
 Production environment variables are configured through the Vercel dashboard.
-
----
-
-## Future Development
-
-Planned improvements include:
-
-* Terminal-based portfolio interface
-* Enhanced UI/UX and animations
-* GitHub activity visualization
-* Additional cybersecurity project writeups
-* Custom domain integration
-
----
-
-## Design Philosophy
-
-The portfolio follows a minimalist, content-focused design.
-
-The goal is to emphasize engineering work, documentation, and technical growth rather than relying on excessive visual effects or stereotypical "hacker" aesthetics.
