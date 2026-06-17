@@ -1,9 +1,10 @@
-import { getPortfolioTopics } from "@/lib/github";
+import { getPortfolioTopics, getTechStack } from "@/lib/github";
 import { socials } from "@/data/socials";
 
 export default async function AboutPage() {
 
     const focusAreas = await getPortfolioTopics();
+    const techStack = await getTechStack();
 
     return (
         <main className="min-h-screen p-8">
@@ -54,6 +55,23 @@ export default async function AboutPage() {
                                 className="px-3 py-2 border rounded"
                             >
                                 {skill}
+                            </span>
+                        ))}
+                    </div>
+                </section>
+
+                <section>
+                    <h2 className="text-2xl font-bold mb-4">
+                        Tech Stack
+                    </h2>
+
+                    <div className="flex flex-wrap gap-2">
+                        {techStack.map((tech) => (
+                            <span
+                                key={tech}
+                                className="px-3 py-2 border rounded"
+                            >
+                                {tech}
                             </span>
                         ))}
                     </div>

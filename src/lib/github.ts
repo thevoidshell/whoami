@@ -63,3 +63,43 @@ export async function getPortfolioTopics(): Promise<string[]> {
         .slice(0, 10)
         .map(([topic]) => topic);
 }
+
+export async function getTechStack(): Promise<string[]> {
+    const repos = await getRepos();
+
+    const portfolioRepos = repos.filter(
+        (repo: any) =>
+            repo.topics?.includes("thevoidshell")
+    );
+
+    const languageTotals = new Map<string, number>();
+
+    for (const repo of portfolioRepos) {
+        const response = await fetch(
+            repo.languages_url,
+            {
+                headers: {
+                    Accept: "application/vnd.github+json",
+                },
+                next: { revalidate: 3600 },
+            }
+        );
+
+        const languages = await response.json();
+
+        Object.entries(languages).forEach(
+            ([language, bytes]) => {
+                languageTotals.set(
+                    language,
+                    (languageTotals.get(language) || 0) +
+                    Number(bytes)
+                );
+            }
+        );
+    }
+
+    return [...languageTotals.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 10)
+        .map(([language]) => language);
+}
