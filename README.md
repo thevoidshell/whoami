@@ -4,8 +4,6 @@ A modern cybersecurity portfolio built with Next.js that automatically synchroni
 
 The goal of this project is to create a portfolio that functions as a live representation of my technical ecosystem rather than a separate website requiring constant manual updates.
 
----
-
 ## Features
 
 ### Dynamic GitHub Integration
