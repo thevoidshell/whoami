@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Button from "@/components/Button";
 import { profile } from "@/data/profile";
 import { socials } from "@/data/socials";
 import { getRepos } from "@/lib/github";
@@ -34,35 +34,21 @@ export default async function Home() {
 
           <div className="mt-8 flex flex-wrap gap-3">
 
-            <Link
-              href="/projects"
-              className="px-4 py-2 border rounded hover:bg-white hover:text-black transition"
-            >
+            <Button href="/projects" external={false}>
               View Projects
-            </Link>
+            </Button>
 
-            <Link
-              href="/resume"
-              className="px-4 py-2 border rounded hover:bg-white hover:text-black transition"
-            >
+            <Button href="/resume" external={false}>
               Resume
-            </Link>
+            </Button>
 
-            <a
-              href={socials.github}
-              target="_blank"
-              className="px-4 py-2 border rounded hover:bg-white hover:text-black transition"
-            >
+            <Button href={socials.github} external={true}>
               GitHub
-            </a>
+            </Button>
 
-            <a
-              href={socials.linkedin}
-              target="_blank"
-              className="px-4 py-2 border rounded hover:bg-white hover:text-black transition"
-            >
+            <Button href={socials.linkedin} external={true}>
               LinkedIn
-            </a>
+            </Button>
 
           </div>
         </section>
