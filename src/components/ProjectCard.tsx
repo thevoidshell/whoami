@@ -1,4 +1,5 @@
 import { Repository } from "@/lib/github";
+import Tag from "./Tag";
 
 interface ProjectCardProps {
     repository: Repository;
@@ -57,9 +58,9 @@ export default function ProjectCard({
                 </h2>
 
                 {isFeatured && (
-                    <span className="px-2 py-1 text-xs border rounded">
+                    <Tag size="badge">
                         Featured
-                    </span>
+                    </Tag>
                 )}
 
             </div>
@@ -97,12 +98,12 @@ export default function ProjectCard({
                 <div className="mt-4 flex flex-wrap gap-2">
 
                     {visibleTopics.map((topic) => (
-                        <span
+                        <Tag
                             key={topic}
-                            className="px-2 py-1 text-sm border rounded"
+                            size="small"
                         >
                             {topic}
-                        </span>
+                        </Tag>
                     ))}
 
                 </div>

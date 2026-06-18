@@ -1,4 +1,5 @@
 import Button from "@/components/Button";
+import Tag from "@/components/Tag";
 import { getPortfolioTopics, getTechStack } from "@/lib/github";
 import { socials } from "@/data/socials";
 
@@ -52,12 +53,11 @@ export default async function AboutPage() {
 
                     <div className="flex flex-wrap gap-2">
                         {skills.map((skill) => (
-                            <span
+                            <Tag
                                 key={skill}
-                                className="px-3 py-2 border rounded"
                             >
                                 {skill}
-                            </span>
+                            </Tag>
                         ))}
                     </div>
                 </section>
@@ -70,12 +70,11 @@ export default async function AboutPage() {
 
                     <div className="flex flex-wrap gap-2">
                         {techStack.map((tech) => (
-                            <span
+                            <Tag
                                 key={tech}
-                                className="px-3 py-2 border rounded"
                             >
                                 {tech}
-                            </span>
+                            </Tag>
                         ))}
                     </div>
                 </section>
@@ -88,12 +87,11 @@ export default async function AboutPage() {
 
                     <div className="flex flex-wrap gap-2">
                         {focusAreas.map((topic) => (
-                            <span
+                            <Tag
                                 key={topic}
-                                className="px-3 py-2 border rounded"
                             >
                                 {topic}
-                            </span>
+                            </Tag>
                         ))}
                     </div>
                 </section>
