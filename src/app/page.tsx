@@ -25,7 +25,7 @@ export default async function Home() {
           </p>
 
           <p className="mt-6 text-gray-400 leading-relaxed max-w-2xl">
-            I build things to understand how they work. <br/>
+            I build things to understand how they work. <br />
             Through infrastructure labs, security research, and AI systems, I explore how complex technologies are built, broken, and improved.
           </p>
 
