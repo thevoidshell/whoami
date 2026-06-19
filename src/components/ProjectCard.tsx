@@ -3,6 +3,7 @@ import Tag from "./Tag";
 
 interface ProjectCardProps {
     repository: Repository;
+    recordNumber?: number;
 }
 
 function getPrimaryLanguage(
@@ -30,6 +31,7 @@ function formatLastUpdated(date: string): string {
 
 export default function ProjectCard({
     repository,
+    recordNumber,
 }: ProjectCardProps) {
 
     const visibleTopics = repository.topics.filter(
@@ -44,6 +46,10 @@ export default function ProjectCard({
     const isFeatured =
         repository.topics.includes("featured");
 
+    const record = recordNumber
+        ?.toString()
+        .padStart(3, "0");
+
 
     return (
         <article
@@ -52,7 +58,11 @@ export default function ProjectCard({
 
             {/* Header */}
             <div className="flex items-center gap-3 flex-wrap">
-
+                {record && (
+                    <p>
+                        {record}
+                    </p>
+                )}
                 <h2 className="text-2xl font-bold">
                     {repository.name}
                 </h2>

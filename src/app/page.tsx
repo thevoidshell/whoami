@@ -55,10 +55,11 @@ export default async function Home() {
           </h2>
 
           <div className="space-y-4">
-            {featuredRepositories.map((repository) => (
+            {featuredRepositories.map((repository, index) => (
               <ProjectCard
                 key={repository.id}
                 repository={repository}
+                recordNumber={index + 1}
               />
             ))}
           </div>
