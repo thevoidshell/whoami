@@ -6,13 +6,24 @@ interface ButtonProps {
     external?: boolean;
 }
 
+const styles = `
+    inline-flex items-center
+    px-4 py-2
+    border border-border
+    text-xs uppercase
+    tracking-[0.2em]
+    font-mono
+    text-muted
+    transition-colors
+    hover:text-foreground
+    hover:border-foreground
+`;
+
 export default function Button({
     href,
     children,
     external = false,
 }: ButtonProps) {
-    const styles =
-        "px-4 py-2 border border-gray-700 rounded-md transition hover:bg-white hover:text-black";
 
     if (external) {
         return (
@@ -28,7 +39,10 @@ export default function Button({
     }
 
     return (
-        <Link href={href} className={styles}>
+        <Link
+            href={href}
+            className={styles}
+        >
             {children}
         </Link>
     );

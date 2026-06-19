@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
+
+/* ========================
+   Theme Colors
+======================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Dark Research Journal */
+  --background: #080808;
+  --foreground: #e8e5de;
+
+  --muted: #a8a29e;
+  --subtle: #6b7280;
+  --border: #262626;
 }
+
+
+/* Light Archive */
+.light {
+  --background: #f5f1e8;
+  --foreground: #1a1a1a;
+
+  --muted: #57534e;
+  --subtle: #78716c;
+  --border: #d6d3d1;
+}
+
+
+/* ========================
+   Tailwind Theme Mapping
+======================== */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Typography */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-cormorant);
+
+
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
+/* ========================
+   Global Styles
+======================== */
+
+html,
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+body {
+  font-family: var(--font-geist-sans);
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
 }

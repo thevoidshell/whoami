@@ -24,12 +24,13 @@ export default async function ProjectsPage() {
         <main className="min-h-screen p-8">
             <section className="max-w-4xl mx-auto">
 
-                <h1 className="text-4xl font-bold mb-8">
+                <h1 className="font-serif text-4xl font-semibold mb-4">
                     Project Index
                 </h1>
 
-                <p className="mt-6 text-gray-400 leading-relaxed max-w-2xl">
-                    A complete record of projects, experiments, and technical studies.
+                <p className="text-muted leading-relaxed max-w-2xl mb-12">
+                    A complete record of projects, experiments,
+                    and technical studies.
                 </p>
 
                 <div className="space-y-6">
@@ -43,6 +44,6 @@ export default async function ProjectsPage() {
                 </div>
 
             </section>
-        </main >
+        </main>
     );
 }

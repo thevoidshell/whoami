@@ -6,27 +6,24 @@ export default function ResumePage() {
 
             <section className="max-w-5xl mx-auto">
 
-                <h1 className="text-4xl font-bold mb-4">
+                <h1 className="font-serif text-4xl font-semibold">
                     Resume
                 </h1>
 
-
-                <p className="text-gray-400 mb-6">
-                    View or download my latest resume.
+                <p className="mt-4 max-w-2xl text-muted leading-relaxed">
+                    View and download my latest resume in PDF format. 
                 </p>
 
-
-                <div className="mb-8">
+                <div className="mt-8">
                     <Button
                         href="/resume.pdf"
                         external
                     >
-                        Download Resume
+                        Download PDF
                     </Button>
                 </div>
 
-
-                <div className="border rounded-lg overflow-hidden">
+                <div className="mt-12 border-t border-border pt-6">
 
                     <iframe
                         src="/resume.pdf"

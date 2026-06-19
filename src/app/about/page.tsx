@@ -14,7 +14,7 @@ export default async function AboutPage() {
         "System Hardening",
         "Malware Analysis",
         "Threat Detection",
-        "Git",
+        "Version Control",
         "Technical Documentation",
     ];
 
@@ -22,33 +22,36 @@ export default async function AboutPage() {
         <main className="min-h-screen p-8">
             <div className="max-w-4xl mx-auto">
 
-                <h1 className="text-4xl font-bold mb-8">
-                    About Me
+                <h1 className="font-serif text-4xl font-semibold mb-10">
+                    About
                 </h1>
 
-                <section className="mb-12">
-                    <p className="text-gray-300 leading-relaxed">
-                        I'm Rachel, a Computer Information Systems student focused on cybersecurity, systems engineering, and applied AI.
-
-                        I learn by building, breaking, analyzing, and documenting systems.
+                <section className="mb-14">
+                    <p className="text-muted leading-relaxed">
+                        I'm Rachel, a Computer Information Systems student focused on cybersecurity,
+                        systems engineering, and applied AI.
                     </p>
 
-                    <p className="mt-4 text-gray-300 leading-relaxed">
-                        My work focuses on understanding how complex systems operate — from web infrastructure and defensive security to machine learning models and their behavior.
+                    <p className="mt-4 text-muted leading-relaxed">
+                        I learn through building, analyzing, securing, and documenting systems.
+                    </p>
+
+                    <p className="mt-4 text-muted leading-relaxed max-w-3xl">
+                        My work explores how complex technologies operate — from hardened
+                        infrastructure and defensive security to machine learning systems
+                        and their behavior.
                     </p>
                 </section>
 
 
-                <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-4">
+                <section className="mb-14">
+                    <h2 className="font-serif text-2xl font-semibold mb-5">
                         Skills
                     </h2>
 
                     <div className="flex flex-wrap gap-2">
                         {skills.map((skill) => (
-                            <Tag
-                                key={skill}
-                            >
+                            <Tag key={skill}>
                                 {skill}
                             </Tag>
                         ))}
@@ -56,16 +59,14 @@ export default async function AboutPage() {
                 </section>
 
 
-                <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-4">
-                        Tech Stack
+                <section className="mb-14">
+                    <h2 className="font-serif text-2xl font-semibold mb-5">
+                        Tools & Technologies
                     </h2>
 
                     <div className="flex flex-wrap gap-2">
                         {techStack.map((tech) => (
-                            <Tag
-                                key={tech}
-                            >
+                            <Tag key={tech}>
                                 {tech}
                             </Tag>
                         ))}
@@ -73,16 +74,14 @@ export default async function AboutPage() {
                 </section>
 
 
-                <section className="mb-12">
-                    <h2 className="text-2xl font-bold mb-4">
-                        Technical Focus Areas
+                <section className="mb-14">
+                    <h2 className="font-serif text-2xl font-semibold mb-5">
+                        Areas of Study
                     </h2>
 
                     <div className="flex flex-wrap gap-2">
                         {focusAreas.map((topic) => (
-                            <Tag
-                                key={topic}
-                            >
+                            <Tag key={topic}>
                                 {topic}
                             </Tag>
                         ))}
@@ -91,32 +90,22 @@ export default async function AboutPage() {
 
 
                 <section>
-                    <h2 className="text-2xl font-bold mb-4">
+                    <h2 className="font-serif text-2xl font-semibold mb-5">
                         Connect
                     </h2>
 
                     <div className="flex flex-wrap gap-3">
-
-                        <Button
-                            href={socials.github}
-                            external
-                        >
+                        <Button href={socials.github} external>
                             GitHub
                         </Button>
 
-
-                        <Button
-                            href={socials.linkedin}
-                            external
-                        >
+                        <Button href={socials.linkedin} external>
                             LinkedIn
                         </Button>
-
 
                         <Button href={socials.email}>
                             Email
                         </Button>
-
                     </div>
                 </section>
 

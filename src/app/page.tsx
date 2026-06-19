@@ -15,18 +15,19 @@ export default async function Home() {
     <main className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
 
-        <section className="mb-16">
-          <h1 className="text-5xl font-bold">
+        <section className="mb-20">
+          <h1 className="font-serif text-5xl font-semibold leading-tight">
             {profile.name}
           </h1>
 
-          <p className="mt-4 text-2xl text-gray-300">
+          <p className="mt-4 text-2xl text-muted">
             {profile.title}
           </p>
 
-          <p className="mt-6 text-gray-400 leading-relaxed max-w-2xl">
-            I build things to understand how they work. <br />
-            Through infrastructure labs, security research, and AI systems, I explore how complex technologies are built, broken, and improved.
+          <p className="mt-6 max-w-2xl text-muted leading-relaxed">
+            I build things to understand how they work. Through infrastructure
+            labs, security research, and intelligent systems, I explore how
+            complex technologies are built, secured, and understood.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -50,7 +51,7 @@ export default async function Home() {
 
 
         <section>
-          <h2 className="text-3xl font-bold mb-6">
+          <h2 className="font-serif text-3xl font-semibold mb-6">
             Selected Work
           </h2>
 
@@ -63,8 +64,8 @@ export default async function Home() {
               />
             ))}
           </div>
-
         </section>
+
       </div>
     </main>
   );

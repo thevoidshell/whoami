@@ -49,74 +49,101 @@ export default function ProjectCard({
 
 
     return (
-        <article className="border-t border-gray-800 py-8">
+        <article className="border-t border-border py-8">
 
             {/* Record Number */}
             {record && (
-                <p className="text-sm tracking-[0.25em] text-gray-600 mb-5">
-                    RECORD {record}
+                <p className="
+                    mb-5
+                    text-xs uppercase tracking-[0.3em]
+                    text-subtle font-mono
+                ">
+                    Record {record}
                 </p>
             )}
 
 
             {/* Title */}
-            <div className="mt-3 flex items-center gap-3 flex-wrap">
-
-                <h2 className="text-3xl font-semibold">
-                    {repository.name}
-                </h2>
-
-            </div>
+            <h2 className="
+                font-serif text-3xl
+                font-semibold leading-tight
+            ">
+                {repository.name}
+            </h2>
 
 
             {/* Description */}
-            <p className="mt-5 max-w-3xl text-gray-400 leading-relaxed">
+            <p className="
+                mt-5 max-w-3xl
+                text-muted leading-relaxed
+            ">
                 {repository.description ?? "No description available."}
             </p>
 
 
             {/* Metadata */}
-            <div className="mt-6 flex gap-8 text-xs tracking-[0.15em] uppercase">
+            <div className="
+                mt-6 flex flex-wrap
+                gap-x-8 gap-y-2
+                text-xs uppercase tracking-[0.15em]
+            ">
+
                 {primaryLanguage && (
                     <div className="flex gap-2">
-                        <span className="text-gray-600">
+
+                        <span className="text-subtle">
                             Language
                         </span>
 
-                        <span className="text-gray-300">
+                        <span className="font-mono text-foreground">
                             {primaryLanguage}
                         </span>
+
                     </div>
                 )}
 
+
                 <div className="flex gap-2">
-                    <span className="text-gray-600">
+
+                    <span className="text-subtle">
                         Revised
                     </span>
 
-                    <span className="text-gray-300">
+                    <span className="font-mono text-foreground">
                         {formatLastUpdated(repository.updated_at)}
                     </span>
+
                 </div>
+
             </div>
 
 
-            {/* Topics */}
+            {/* Keywords */}
             {visibleTopics.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-2 border-l border-gray-700 pl-3">
+                <div className="
+                    mt-5 flex flex-wrap gap-2
+                    border-l border-border pl-3
+                ">
+
                     {visibleTopics.map((topic, index) => (
-                        <span key={topic} className="flex items-center">
+                        <span
+                            key={topic}
+                            className="flex items-center"
+                        >
+
                             <Tag size="index">
                                 {topic}
                             </Tag>
 
                             {index < visibleTopics.length - 1 && (
-                                <span className="mx-2 text-gray-600">
+                                <span className="mx-2 text-subtle">
                                     ·
                                 </span>
                             )}
+
                         </span>
                     ))}
+
                 </div>
             )}
 
@@ -126,7 +153,13 @@ export default function ProjectCard({
                 href={repository.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block mt-6 text-sm tracking-wide text-gray-300 hover:text-white transition"
+                className="
+                    inline-block mt-8
+                    text-xs uppercase tracking-[0.15em]
+                    text-muted hover:text-foreground
+                    transition
+                    font-mono
+                "
             >
                 View Source →
             </a>
