@@ -1,6 +1,6 @@
 export const profile = {
     name: "Rachel Gupta",
-    title: "Cybersecurity Student",
+    title: "Systems • Security • AI",
 
     focus: [
         "Offensive Security",

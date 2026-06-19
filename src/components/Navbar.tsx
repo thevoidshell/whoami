@@ -5,7 +5,7 @@ export default function Navbar() {
     <nav className="flex gap-6 p-6 border-b">
       <Link href="/">Home</Link>
       <Link href="/about">About</Link>
-      <Link href="/projects">Projects</Link>
+      <Link href="/projects">Work</Link>
       <Link href="/resume">Resume</Link>
     </nav>
   );

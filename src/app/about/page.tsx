@@ -23,25 +23,18 @@ export default async function AboutPage() {
             <div className="max-w-4xl mx-auto">
 
                 <h1 className="text-4xl font-bold mb-8">
-                    About
+                    About Me
                 </h1>
 
                 <section className="mb-12">
                     <p className="text-gray-300 leading-relaxed">
-                        I'm Rachel, a Computer Information Systems student exploring
-                        cybersecurity through hands-on projects, infrastructure labs,
-                        malware analysis, and security research.
+                        I'm Rachel, a Computer Information Systems student focused on cybersecurity, systems engineering, and applied AI.
+
+                        I learn by building, breaking, analyzing, and documenting systems.
                     </p>
 
                     <p className="mt-4 text-gray-300 leading-relaxed">
-                        My current focus areas include Linux administration, web
-                        infrastructure, detection engineering, malware analysis, and
-                        applying AI to security problems.
-                    </p>
-
-                    <p className="mt-4 text-gray-300 leading-relaxed">
-                        I'm currently building projects while developing practical
-                        cybersecurity and systems engineering skills.
+                        My work focuses on understanding how complex systems operate — from web infrastructure and defensive security to machine learning models and their behavior.
                     </p>
                 </section>
 

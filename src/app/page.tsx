@@ -25,16 +25,13 @@ export default async function Home() {
           </p>
 
           <p className="mt-6 text-gray-400 leading-relaxed max-w-2xl">
-            Building secure systems, infrastructure,
-            and AI-powered security tools.
-            I explore cybersecurity through hands-on
-            labs, detection engineering, malware
-            analysis, and software development.
+            I build things to understand how they work. <br/>
+            Through infrastructure labs, security research, and AI systems, I explore how complex technologies are built, broken, and improved.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/projects">
-              View Projects
+              Explore Work
             </Button>
 
             <Button href="/resume">
@@ -54,7 +51,7 @@ export default async function Home() {
 
         <section>
           <h2 className="text-3xl font-bold mb-6">
-            Featured Projects
+            Selected Work
           </h2>
 
           <div className="space-y-4">
