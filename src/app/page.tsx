@@ -13,7 +13,7 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen p-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
 
         <section className="mb-20">
           <h1 className="font-serif text-5xl font-semibold leading-tight">
