@@ -38,8 +38,10 @@ export default function ThemeToggle() {
             aria-label="Toggle theme"
             className="
                 fixed
-                top-10
-                right-12
+                top-6
+                right-6
+                md:top-10
+                md:right-12
                 z-50
 
                 group

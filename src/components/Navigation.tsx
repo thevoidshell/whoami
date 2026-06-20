@@ -46,13 +46,17 @@ export default function Navigation() {
     return (
         <aside
             className="
-                fixed
-                left-12
-                top-1/2
-                -translate-y-1/2
-                z-50
-                w-48
-            "
+                        hidden
+                        md:block
+
+                        fixed
+                        left-12
+                        top-1/2
+                        -translate-y-1/2
+
+                        z-50
+                        w-48
+                    "
         >
             <nav>
                 <ul className="flex flex-col gap-8">

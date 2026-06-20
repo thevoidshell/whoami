@@ -16,15 +16,19 @@ export default async function HomeSection() {
     <section
       id="home"
       className="
-                  min-h-screen
-                  px-12
-                  py-24
-                  flex
-                  flex-col
-                  justify-center
-                "
+    min-h-screen
+    px-6
+    md:px-12
+
+    py-20
+    md:py-24
+
+    flex
+    flex-col
+    justify-center
+"
     >
-      <div className="max-w-5xl">
+      <div className="max-w-5xl w-full">
 
         {/* Introduction */}
         <header className="mb-24">

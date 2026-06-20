@@ -41,12 +41,16 @@ export default function ContactRail() {
     return (
         <aside
             className="
-                fixed
-                right-12
-                top-1/2
-                -translate-y-1/2
-                z-50
-            "
+                        hidden
+                        md:block
+
+                        fixed
+                        right-12
+                        top-1/2
+                        -translate-y-1/2
+
+                        z-50
+                    "
         >
             <nav>
                 <ul className="flex flex-col gap-8">

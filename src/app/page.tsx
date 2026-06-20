@@ -9,9 +9,13 @@ export default function Page() {
 
     <div className="flex">
 
-      
-
-      <main className="flex-1 pl-80">
+      <main
+        className="
+                    flex-1
+                    ml-0
+                    md:ml-80
+                  "
+      >
 
         <HomeSection />
         <AboutSection />
