@@ -7,9 +7,30 @@ export interface Repository {
     updated_at: string;
     languages_url: string;
     languages: Record<string, number>;
+}
+
+
+const githubFetchOptions = {
+    headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+    },
+    next: {
+        revalidate: 3600,
+    },
 };
 
+
 let cachedRepositories: Promise<Repository[]> | null = null;
+
+
+function getPortfolioRepositories(
+    repositories: Repository[]
+): Repository[] {
+    return repositories.filter((repository) =>
+        repository.topics.includes("thevoidshell")
+    );
+}
 
 
 export async function getRepos(): Promise<Repository[]> {
@@ -17,36 +38,32 @@ export async function getRepos(): Promise<Repository[]> {
         return cachedRepositories;
     }
 
+
     cachedRepositories = (async () => {
         const repositoryResponse = await fetch(
             "https://api.github.com/user/repos?per_page=100",
-            {
-                headers: {
-                    Accept: "application/vnd.github+json",
-                    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-                },
-                next: { revalidate: 3600 },
-            }
+            githubFetchOptions
         );
 
+
         if (!repositoryResponse.ok) {
-            throw new Error("Failed to fetch GitHub repositories");
+            throw new Error(
+                "Failed to fetch GitHub repositories"
+            );
         }
 
-        const repositories = await repositoryResponse.json();
+
+        const repositories =
+            (await repositoryResponse.json()) as Repository[];
+
 
         const repositoriesWithLanguages = await Promise.all(
-            repositories.map(async (repository: Repository) => {
+            repositories.map(async (repository) => {
                 const languageResponse = await fetch(
                     repository.languages_url,
-                    {
-                        headers: {
-                            Accept: "application/vnd.github+json",
-                            Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-                        },
-                        next: { revalidate: 3600 },
-                    }
+                    githubFetchOptions
                 );
+
 
                 if (!languageResponse.ok) {
                     return {
@@ -55,7 +72,10 @@ export async function getRepos(): Promise<Repository[]> {
                     };
                 }
 
-                const languageStatistics = await languageResponse.json();
+
+                const languageStatistics =
+                    await languageResponse.json();
+
 
                 return {
                     ...repository,
@@ -64,8 +84,10 @@ export async function getRepos(): Promise<Repository[]> {
             })
         );
 
+
         return repositoriesWithLanguages;
     })();
+
 
     return cachedRepositories;
 }
@@ -74,19 +96,24 @@ export async function getRepos(): Promise<Repository[]> {
 export async function getPortfolioTopics(): Promise<string[]> {
     const repositories = await getRepos();
 
-    const portfolioRepositories = repositories.filter(
-        (repository) =>
-            repository.topics?.includes("thevoidshell")
-    );
+    const portfolioRepositories =
+        getPortfolioRepositories(repositories);
+
 
     const topicScores = new Map<string, number>();
 
+
     portfolioRepositories.forEach((repository) => {
         const daysSinceUpdate =
-            (Date.now() - new Date(repository.updated_at).getTime()) /
+            (
+                Date.now() -
+                new Date(repository.updated_at).getTime()
+            ) /
             (1000 * 60 * 60 * 24);
 
+
         let recencyWeight = 1;
+
 
         if (daysSinceUpdate <= 30) {
             recencyWeight = 5;
@@ -98,7 +125,8 @@ export async function getPortfolioTopics(): Promise<string[]> {
             recencyWeight = 2;
         }
 
-        repository.topics?.forEach((topic) => {
+
+        repository.topics.forEach((topic) => {
             if (
                 topic === "thevoidshell" ||
                 topic === "featured"
@@ -106,12 +134,14 @@ export async function getPortfolioTopics(): Promise<string[]> {
                 return;
             }
 
+
             topicScores.set(
                 topic,
-                (topicScores.get(topic) || 0) + recencyWeight
+                (topicScores.get(topic) ?? 0) + recencyWeight
             );
         });
     });
+
 
     return [...topicScores.entries()]
         .sort((a, b) => b[1] - a[1])
@@ -123,23 +153,25 @@ export async function getPortfolioTopics(): Promise<string[]> {
 export async function getTechStack(): Promise<string[]> {
     const repositories = await getRepos();
 
-    const portfolioRepositories = repositories.filter(
-        (repository) =>
-            repository.topics?.includes("thevoidshell")
-    );
+    const portfolioRepositories =
+        getPortfolioRepositories(repositories);
+
 
     const languageTotals = new Map<string, number>();
+
 
     portfolioRepositories.forEach((repository) => {
         Object.entries(repository.languages).forEach(
             ([language, bytes]) => {
                 languageTotals.set(
                     language,
-                    (languageTotals.get(language) || 0) + Number(bytes)
+                    (languageTotals.get(language) ?? 0) +
+                    bytes
                 );
             }
         );
     });
+
 
     return [...languageTotals.entries()]
         .sort((a, b) => b[1] - a[1])

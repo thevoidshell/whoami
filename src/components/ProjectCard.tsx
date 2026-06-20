@@ -9,12 +9,15 @@ interface ProjectCardProps {
 function getPrimaryLanguage(
     languages: Record<string, number>
 ): string | null {
-    const sortedLanguages = Object.entries(languages)
-        .sort((first, second) => second[1] - first[1]);
-
-    return sortedLanguages.length > 0
-        ? sortedLanguages[0][0]
-        : null;
+    return (
+        Object.entries(languages).reduce(
+            (largest, current) =>
+                current[1] > largest[1]
+                    ? current
+                    : largest,
+            ["", 0] as [string, number]
+        )[0] || null
+    );
 }
 
 
@@ -51,42 +54,58 @@ export default function ProjectCard({
     return (
         <article className="border-t border-border py-8">
 
-            {/* Record Number */}
             {record && (
-                <p className="
-                    mb-5
-                    text-xs uppercase tracking-[0.3em]
-                    text-subtle font-mono
-                ">
+                <p
+                    className="
+                        mb-5
+                        font-mono
+                        text-xs
+                        uppercase
+                        tracking-[0.3em]
+                        text-subtle
+                    "
+                >
                     Record {record}
                 </p>
             )}
 
 
-            {/* Title */}
-            <h2 className="
-                font-serif text-3xl
-                font-semibold leading-tight
-            ">
+            <h2
+                className="
+                    font-serif
+                    text-3xl
+                    font-semibold
+                    leading-tight
+                "
+            >
                 {repository.name}
             </h2>
 
 
-            {/* Description */}
-            <p className="
-                mt-5 max-w-3xl
-                text-muted leading-relaxed
-            ">
+            <p
+                className="
+                    mt-5
+                    max-w-3xl
+                    text-muted
+                    leading-relaxed
+                "
+            >
                 {repository.description ?? "No description available."}
             </p>
 
 
-            {/* Metadata */}
-            <div className="
-                mt-6 flex flex-wrap
-                gap-x-8 gap-y-2
-                text-xs uppercase tracking-[0.15em]
-            ">
+            <div
+                className="
+                    mt-6
+                    flex
+                    flex-wrap
+                    gap-x-8
+                    gap-y-2
+                    text-xs
+                    uppercase
+                    tracking-[0.15em]
+                "
+            >
 
                 {primaryLanguage && (
                     <div className="flex gap-2">
@@ -118,15 +137,21 @@ export default function ProjectCard({
             </div>
 
 
-            {/* Keywords */}
             {visibleTopics.length > 0 && (
-                <div className="
-                    mt-5 flex flex-wrap gap-2
-                    border-l border-border pl-3
-                ">
+                <ul
+                    className="
+                        mt-5
+                        flex
+                        flex-wrap
+                        gap-2
+                        border-l
+                        border-border
+                        pl-3
+                    "
+                >
 
                     {visibleTopics.map((topic, index) => (
-                        <span
+                        <li
                             key={topic}
                             className="flex items-center"
                         >
@@ -136,29 +161,36 @@ export default function ProjectCard({
                             </Tag>
 
                             {index < visibleTopics.length - 1 && (
-                                <span className="mx-2 text-subtle">
+                                <span
+                                    className="mx-2 text-subtle"
+                                    aria-hidden="true"
+                                >
                                     ·
                                 </span>
                             )}
 
-                        </span>
+                        </li>
                     ))}
 
-                </div>
+                </ul>
             )}
 
 
-            {/* Repository Link */}
             <a
                 href={repository.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`View source code for ${repository.name}`}
                 className="
-                    inline-block mt-8
-                    text-xs uppercase tracking-[0.15em]
-                    text-muted hover:text-foreground
-                    transition
+                    mt-8
+                    inline-block
                     font-mono
+                    text-xs
+                    uppercase
+                    tracking-[0.15em]
+                    text-muted
+                    transition-colors
+                    hover:text-foreground
                 "
             >
                 View Source →

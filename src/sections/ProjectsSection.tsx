@@ -4,37 +4,40 @@ import { getRepos } from "@/lib/github";
 export default async function ProjectsSection() {
     const repositories = await getRepos();
 
-    const portfolioRepositories = repositories.filter(
-        (repository) =>
-            repository.topics.includes("thevoidshell")
+    const portfolioRepositories = repositories.filter((repository) =>
+        repository.topics?.includes("thevoidshell")
     );
 
-    const sortedRepositories = [...portfolioRepositories].sort(
-        (first, second) =>
-            Number(second.topics.includes("featured")) -
-            Number(first.topics.includes("featured"))
-    );
+    const sortedRepositories = portfolioRepositories.sort((a, b) => {
+        const aFeatured = Number(a.topics?.includes("featured"));
+        const bFeatured = Number(b.topics?.includes("featured"));
+
+        return bFeatured - aFeatured;
+    });
 
     return (
         <section
             id="work"
+            aria-labelledby="projects-title"
             className="
-    min-h-screen
-    px-6
-    md:px-12
+                min-h-screen
+                px-6
+                md:px-12
 
-    pt-20
-    pb-28
-    md:py-24
+                pt-20
+                pb-28
+                md:py-24
 
-    flex
-    flex-col
-    justify-center
-"
+                flex
+                flex-col
+                justify-center
+            "
         >
             <div className="max-w-5xl w-full">
-
-                <h1 className="font-serif text-4xl font-semibold mb-4">
+                <h1
+                    id="projects-title"
+                    className="font-serif text-4xl font-semibold mb-4"
+                >
                     Project Index
                 </h1>
 
@@ -52,9 +55,7 @@ export default async function ProjectsSection() {
                         />
                     ))}
                 </div>
-
             </div>
-
         </section>
     );
 }

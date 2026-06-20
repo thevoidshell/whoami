@@ -6,7 +6,6 @@ import { Sun, Moon } from "lucide-react";
 export default function ThemeToggle() {
     const [lightMode, setLightMode] = useState(false);
 
-
     useEffect(() => {
         const savedTheme = localStorage.getItem("theme");
 
@@ -18,24 +17,28 @@ export default function ThemeToggle() {
 
 
     function toggleTheme() {
-        const html = document.documentElement;
+        const nextTheme = !lightMode;
 
-        if (lightMode) {
-            html.classList.remove("light");
-            localStorage.setItem("theme", "dark");
-        } else {
-            html.classList.add("light");
+        if (nextTheme) {
+            document.documentElement.classList.add("light");
             localStorage.setItem("theme", "light");
+        } else {
+            document.documentElement.classList.remove("light");
+            localStorage.setItem("theme", "dark");
         }
 
-        setLightMode(!lightMode);
+        setLightMode(nextTheme);
     }
 
 
     return (
         <button
             onClick={toggleTheme}
-            aria-label="Toggle theme"
+            aria-label={
+                lightMode
+                    ? "Switch to dark mode"
+                    : "Switch to light mode"
+            }
             className="
                 fixed
                 top-6
@@ -50,6 +53,9 @@ export default function ThemeToggle() {
                 justify-end
                 gap-3
 
+                px-2
+                py-1
+
                 text-subtle
                 hover:text-foreground
 
@@ -58,7 +64,6 @@ export default function ThemeToggle() {
             "
         >
 
-            {/* Hover label */}
             <span
                 className="
                     font-mono
@@ -83,7 +88,6 @@ export default function ThemeToggle() {
             </span>
 
 
-            {/* Icon */}
             <span
                 className="
                     transition-transform

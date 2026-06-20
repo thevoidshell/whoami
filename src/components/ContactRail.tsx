@@ -41,18 +41,16 @@ export default function ContactRail() {
     return (
         <aside
             className="
-                        hidden
-                        md:block
-
-                        fixed
-                        right-12
-                        top-1/2
-                        -translate-y-1/2
-
-                        z-50
-                    "
+                hidden
+                md:block
+                fixed
+                right-12
+                top-1/2
+                -translate-y-1/2
+                z-50
+            "
         >
-            <nav>
+            <nav aria-label="Contact links">
                 <ul className="flex flex-col gap-8">
 
                     {contacts.map((contact) => {
@@ -74,13 +72,14 @@ export default function ContactRail() {
                                             : undefined
                                     }
                                     aria-label={contact.label}
-                                    title={contact.label}
                                     className="
                                         group
                                         flex
                                         items-center
                                         justify-end
                                         gap-3
+                                        px-2
+                                        py-1
                                         text-subtle
                                         hover:text-foreground
                                         transition-colors
@@ -88,7 +87,6 @@ export default function ContactRail() {
                                     "
                                 >
 
-                                    {/* Hover label */}
                                     <span
                                         className="
                                             font-mono
@@ -96,15 +94,11 @@ export default function ContactRail() {
                                             uppercase
                                             tracking-[0.25em]
                                             whitespace-nowrap
-
                                             opacity-0
                                             translate-x-3
-
+                                            pointer-events-none
                                             transition-all
                                             duration-300
-
-                                            pointer-events-none
-
                                             group-hover:opacity-100
                                             group-hover:translate-x-0
                                         "
@@ -113,7 +107,6 @@ export default function ContactRail() {
                                     </span>
 
 
-                                    {/* Icon */}
                                     <span
                                         className="
                                             transition-transform

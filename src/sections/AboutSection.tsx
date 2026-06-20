@@ -19,26 +19,25 @@ export default async function AboutSection() {
     return (
         <section
             id="profile"
+            aria-label="Profile section"
             className="
-    min-h-screen
-    px-6
-    md:px-12
-
-    pt-20
-    pb-28
-    md:py-24
-
-    flex
-    flex-col
-    justify-center
-"
+                min-h-screen
+                px-6
+                md:px-12
+                pt-20
+                pb-28
+                md:py-24
+                flex
+                flex-col
+                justify-center
+            "
         >
             <div className="max-w-5xl w-full">
-
-                <h1 className="font-serif text-4xl font-semibold mb-10">
-                    Profile
-                </h1>
-
+                <header>
+                    <h1 className="font-serif text-4xl font-semibold mb-10">
+                        Profile
+                    </h1>
+                </header>
 
                 <div className="mb-14">
                     <p className="text-muted leading-relaxed">
@@ -57,53 +56,60 @@ export default async function AboutSection() {
                     </p>
                 </div>
 
-
                 <div className="mb-14">
-                    <h2 className="font-serif text-2xl font-semibold mb-5">
+                    <h2 id="skills-heading" className="font-serif text-2xl font-semibold mb-5">
                         Skills
                     </h2>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div
+                        className="flex flex-wrap gap-2"
+                        role="list"
+                        aria-labelledby="skills-heading"
+                    >
                         {skills.map((skill) => (
-                            <Tag key={skill}>
-                                {skill}
-                            </Tag>
+                            <div key={skill} role="listitem">
+                                <Tag>{skill}</Tag>
+                            </div>
                         ))}
                     </div>
                 </div>
 
-
                 <div className="mb-14">
-                    <h2 className="font-serif text-2xl font-semibold mb-5">
+                    <h2 id="tech-heading" className="font-serif text-2xl font-semibold mb-5">
                         Tools & Technologies
                     </h2>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div
+                        className="flex flex-wrap gap-2"
+                        role="list"
+                        aria-labelledby="tech-heading"
+                    >
                         {techStack.map((tech) => (
-                            <Tag key={tech}>
-                                {tech}
-                            </Tag>
+                            <div key={tech} role="listitem">
+                                <Tag>{tech}</Tag>
+                            </div>
                         ))}
                     </div>
                 </div>
 
-
                 <div>
-                    <h2 className="font-serif text-2xl font-semibold mb-5">
+                    <h2 id="focus-heading" className="font-serif text-2xl font-semibold mb-5">
                         Areas of Study
                     </h2>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div
+                        className="flex flex-wrap gap-2"
+                        role="list"
+                        aria-labelledby="focus-heading"
+                    >
                         {focusAreas.map((topic) => (
-                            <Tag key={topic}>
-                                {topic}
-                            </Tag>
+                            <div key={topic} role="listitem">
+                                <Tag>{topic}</Tag>
+                            </div>
                         ))}
                     </div>
                 </div>
-
             </div>
-
         </section>
     );
 }

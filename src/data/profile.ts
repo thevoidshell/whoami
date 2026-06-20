@@ -1,5 +1,6 @@
 export const profile = {
     name: "Rachel Gupta",
+
     title: "Systems • Security • AI",
 
     focus: [
@@ -13,4 +14,4 @@ export const profile = {
         "Athena",
         "Alexandria",
     ],
-};
+} as const;

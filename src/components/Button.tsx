@@ -10,13 +10,21 @@ const styles = `
     inline-flex items-center
     px-4 py-2
     border border-border
-    text-xs uppercase
-    tracking-[0.2em]
+
     font-mono
+    text-xs
+    uppercase
+    tracking-[0.2em]
+
     text-muted
     transition-colors
+
     hover:text-foreground
     hover:border-foreground
+
+    focus-visible:outline-none
+    focus-visible:text-foreground
+    focus-visible:border-foreground
 `;
 
 export default function Button({
@@ -24,7 +32,6 @@ export default function Button({
     children,
     external = false,
 }: ButtonProps) {
-
     if (external) {
         return (
             <a
