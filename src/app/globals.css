@@ -7,6 +7,8 @@
 
 :root {
   /* Dark Research Journal */
+  color-scheme: dark;
+
   --background: #080808;
   --foreground: #e8e5de;
 
@@ -18,12 +20,14 @@
 
 /* Light Archive */
 .light {
-  --background: #F7F3E8;
-  --foreground: #1A1816;
+  color-scheme: light;
 
-  --muted: #5E584F;
-  --subtle: #8A8276;
-  --border: #D8D1C4;
+  --background: #f7f3e8;
+  --foreground: #1a1816;
+
+  --muted: #5e584f;
+  --subtle: #8a8276;
+  --border: #d8d1c4;
 }
 
 
@@ -52,18 +56,17 @@
    Global Styles
 ======================== */
 
-html,
-body {
-  background: var(--background);
-  color: var(--foreground);
-}
-
 html {
   scroll-behavior: smooth;
 }
 
+
 body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
   font-family: var(--font-geist-sans);
+
   transition:
     background-color 300ms ease,
     color 300ms ease;

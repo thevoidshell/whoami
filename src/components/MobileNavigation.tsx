@@ -12,12 +12,10 @@ const links = [
 export default function MobileNavigation() {
     const [activeSection, setActiveSection] = useState("home");
 
-
     useEffect(() => {
         const sections = links
             .map((link) => document.getElementById(link.id))
             .filter(Boolean) as HTMLElement[];
-
 
         const observer = new IntersectionObserver(
             (entries) => {
@@ -33,22 +31,18 @@ export default function MobileNavigation() {
             }
         );
 
-
         sections.forEach((section) => {
             observer.observe(section);
         });
 
-
         return () => {
-            sections.forEach((section) => {
-                observer.unobserve(section);
-            });
+            observer.disconnect();
         };
     }, []);
 
-
     return (
         <nav
+            aria-label="Mobile section navigation"
             className="
                 md:hidden
                 fixed
@@ -56,21 +50,28 @@ export default function MobileNavigation() {
                 left-0
                 right-0
                 z-50
-
-                bg-background/90
-                backdrop-blur-md
                 border-t
                 border-border
+                bg-background/90
+                backdrop-blur-md
             "
         >
-            <ul className="flex justify-around py-4">
-
+            <ul className="flex py-4">
                 {links.map((link) => (
-                    <li key={link.id}>
-
+                    <li
+                        key={link.id}
+                        className="flex-1 text-center"
+                    >
                         <a
                             href={`#${link.id}`}
+                            aria-current={
+                                activeSection === link.id
+                                    ? "page"
+                                    : undefined
+                            }
                             className={`
+                                block
+                                py-2
                                 font-mono
                                 text-[11px]
                                 uppercase
@@ -85,10 +86,8 @@ export default function MobileNavigation() {
                         >
                             {link.label}
                         </a>
-
                     </li>
                 ))}
-
             </ul>
         </nav>
     );

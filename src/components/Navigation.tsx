@@ -26,7 +26,6 @@ export default function Navigation() {
                 });
             },
             {
-                // Creates a "detection zone" in the middle of the screen
                 rootMargin: "-45% 0px -45% 0px",
                 threshold: 0,
             }
@@ -37,33 +36,34 @@ export default function Navigation() {
         });
 
         return () => {
-            sections.forEach((section) => {
-                observer.unobserve(section);
-            });
+            observer.disconnect();
         };
     }, []);
 
     return (
         <aside
             className="
-                        hidden
-                        md:block
-
-                        fixed
-                        left-12
-                        top-1/2
-                        -translate-y-1/2
-
-                        z-50
-                        w-48
-                    "
+                hidden
+                md:block
+                fixed
+                left-12
+                top-1/2
+                -translate-y-1/2
+                z-50
+                w-48
+            "
         >
-            <nav>
+            <nav aria-label="Section navigation">
                 <ul className="flex flex-col gap-8">
                     {links.map((link) => (
                         <li key={link.id}>
                             <a
                                 href={`#${link.id}`}
+                                aria-current={
+                                    activeSection === link.id
+                                        ? "page"
+                                        : undefined
+                                }
                                 className={`
                                     block
                                     font-mono

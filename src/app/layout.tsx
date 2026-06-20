@@ -6,11 +6,13 @@ import {
 } from "next/font/google";
 
 import "./globals.css";
+
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
+import MobileNavigation from "@/components/MobileNavigation";
 import ContactRail from "@/components/ContactRail";
 import ThemeToggle from "@/components/ThemeToggle";
-import MobileNavigation from "@/components/MobileNavigation";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,14 +48,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`
-        ${geistSans.variable}
-        ${geistMono.variable}
-        ${cormorant.variable}
-        antialiased
-      `}
+                ${geistSans.variable}
+                ${geistMono.variable}
+                ${cormorant.variable}
+                antialiased
+            `}
     >
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen">
 
         <Navigation />
         <MobileNavigation />
