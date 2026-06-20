@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import ContactRail from "@/components/ContactRail";
 import ThemeToggle from "@/components/ThemeToggle";
+import MobileNavigation from "@/components/MobileNavigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,6 +56,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col">
 
         <Navigation />
+        <MobileNavigation />
         <ContactRail />
         <ThemeToggle />
 

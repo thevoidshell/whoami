@@ -10,7 +10,8 @@ export default function ContactSection() {
     px-6
     md:px-12
 
-    py-20
+    pt-20
+    pb-28
     md:py-24
 
     flex
