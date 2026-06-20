@@ -9,6 +9,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import ContactRail from "@/components/ContactRail";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,6 +56,7 @@ export default function RootLayout({
 
         <Navigation />
         <ContactRail />
+        <ThemeToggle />
 
         {children}
 

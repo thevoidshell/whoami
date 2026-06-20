@@ -18,12 +18,12 @@
 
 /* Light Archive */
 .light {
-  --background: #f5f1e8;
-  --foreground: #1a1a1a;
+  --background: #F7F3E8;
+  --foreground: #1A1816;
 
-  --muted: #57534e;
-  --subtle: #78716c;
-  --border: #d6d3d1;
+  --muted: #5E584F;
+  --subtle: #8A8276;
+  --border: #D8D1C4;
 }
 
 
@@ -65,6 +65,6 @@ html {
 body {
   font-family: var(--font-geist-sans);
   transition:
-    background-color 200ms ease,
-    color 200ms ease;
+    background-color 300ms ease,
+    color 300ms ease;
 }
