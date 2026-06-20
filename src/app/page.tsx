@@ -1,21 +1,26 @@
 import Navigation from "@/components/Navigation";
-
 import HomeSection from "@/sections/HomeSection";
 import AboutSection from "@/sections/AboutSection";
 import ProjectsSection from "@/sections/ProjectsSection";
-import ResumeSection from "@/sections/ResumeSection";
+import ContactSection from "@/sections/ContactSection";
 
 export default function Page() {
   return (
-    <div className="flex">
-      <Navigation />
 
-      <main className="flex-1 pl-56">
+    <div className="flex">
+
+      
+
+      <main className="flex-1 pl-80">
+
         <HomeSection />
         <AboutSection />
         <ProjectsSection />
-        <ResumeSection />
+        <ContactSection />
+
       </main>
+
     </div>
+
   );
 }

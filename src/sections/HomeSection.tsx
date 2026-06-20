@@ -15,73 +15,83 @@ export default async function HomeSection() {
   return (
     <section
       id="home"
-      className="min-h-screen px-12 py-24 max-w-5xl"
+      className="
+                  min-h-screen
+                  px-12
+                  py-24
+                  flex
+                  flex-col
+                  justify-center
+                "
     >
+      <div className="max-w-5xl">
 
-      {/* Introduction */}
-      <header className="mb-24">
+        {/* Introduction */}
+        <header className="mb-24">
 
-        <h1 className="font-serif text-5xl font-semibold leading-tight">
-          {profile.name}
-        </h1>
+          <h1 className="font-serif text-5xl font-semibold leading-tight">
+            {profile.name}
+          </h1>
 
-        <p className="mt-4 text-2xl text-muted">
-          {profile.title}
-        </p>
+          <p className="mt-4 text-2xl text-muted">
+            {profile.title}
+          </p>
 
-        <p className="mt-6 max-w-2xl text-muted leading-relaxed">
-          I build things to understand how they work.
-          Through infrastructure labs, security research,
-          and intelligent systems, I explore how complex
-          technologies are built, secured, and understood.
-        </p>
-
-
-        <div className="mt-8 flex flex-wrap gap-3">
-
-          <Button href="#work">
-            View Work
-          </Button>
-
-          <Button href="#resume">
-            Resume
-          </Button>
-
-          <Button
-            href={socials.github}
-            external
-          >
-            GitHub
-          </Button>
-
-          <Button
-            href={socials.linkedin}
-            external
-          >
-            LinkedIn
-          </Button>
-
-        </div>
-
-      </header>
+          <p className="mt-6 max-w-2xl text-muted leading-relaxed">
+            I build things to understand how they work.
+            Through infrastructure labs, security research,
+            and intelligent systems, I explore how complex
+            technologies are built, secured, and understood.
+          </p>
 
 
-      {/* Selected Work */}
-      <div>
+          <div className="mt-8 flex flex-wrap gap-3">
 
-        <h2 className="font-serif text-3xl font-semibold mb-6">
-          Selected Work
-        </h2>
+            <Button href="#work">
+              View Work
+            </Button>
+
+            <Button href="#resume">
+              Resume
+            </Button>
+
+            <Button
+              href={socials.github}
+              external
+            >
+              GitHub
+            </Button>
+
+            <Button
+              href={socials.linkedin}
+              external
+            >
+              LinkedIn
+            </Button>
+
+          </div>
+
+        </header>
 
 
-        <div className="space-y-4">
-          {featuredRepositories.map((repository, index) => (
-            <ProjectCard
-              key={repository.id}
-              repository={repository}
-              recordNumber={index + 1}
-            />
-          ))}
+        {/* Selected Work */}
+        <div>
+
+          <h2 className="font-serif text-3xl font-semibold mb-6">
+            Selected Work
+          </h2>
+
+
+          <div className="space-y-4">
+            {featuredRepositories.map((repository, index) => (
+              <ProjectCard
+                key={repository.id}
+                repository={repository}
+                recordNumber={index + 1}
+              />
+            ))}
+          </div>
+
         </div>
 
       </div>

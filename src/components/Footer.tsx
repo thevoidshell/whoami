@@ -1,21 +1,9 @@
 export default function Footer() {
     return (
-        <footer className="border-t border-border">
-
-            <div
-                className="
-                    max-w-4xl mx-auto
-                    px-8 py-6
-                    text-xs uppercase
-                    tracking-[0.2em]
-                    text-subtle
-                    text-center
-                    font-mono
-                "
-            >
+        <footer className="px-12 pb-12 pt-6 border-t border-border">
+            <p className="font-mono text-xs tracking-[0.15em] text-subtle uppercase mx-auto text-center">
                 Live index of projects and experiments.
-            </div>
-
+            </p>
         </footer>
     );
 }

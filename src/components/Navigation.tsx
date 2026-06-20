@@ -3,7 +3,7 @@ export default function Navigation() {
         { id: "home", label: "01 HOME" },
         { id: "profile", label: "02 PROFILE" },
         { id: "work", label: "03 WORK" },
-        { id: "resume", label: "04 RESUME" },
+        { id: "contact", label: "04 CONTACT" },
     ];
 
     return (

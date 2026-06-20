@@ -18,26 +18,38 @@ export default async function ProjectsSection() {
     return (
         <section
             id="work"
-            className="min-h-screen px-12 py-24 max-w-5xl"
+            className="
+                  min-h-screen
+                  px-12
+                  py-24
+                  flex
+                  flex-col
+                  justify-center
+                "
         >
-            <h1 className="font-serif text-4xl font-semibold mb-4">
-                Project Index
-            </h1>
+            <div className="max-w-5xl">
 
-            <p className="max-w-2xl text-muted leading-relaxed mb-12">
-                A complete record of projects, experiments,
-                and technical studies.
-            </p>
+                <h1 className="font-serif text-4xl font-semibold mb-4">
+                    Project Index
+                </h1>
 
-            <div className="space-y-6">
-                {sortedRepositories.map((repository, index) => (
-                    <ProjectCard
-                        key={repository.id}
-                        repository={repository}
-                        recordNumber={index + 1}
-                    />
-                ))}
+                <p className="max-w-2xl text-muted leading-relaxed mb-12">
+                    A complete record of projects, experiments,
+                    and technical studies.
+                </p>
+
+                <div className="space-y-6">
+                    {sortedRepositories.map((repository, index) => (
+                        <ProjectCard
+                            key={repository.id}
+                            repository={repository}
+                            recordNumber={index + 1}
+                        />
+                    ))}
+                </div>
+
             </div>
+
         </section>
     );
 }
