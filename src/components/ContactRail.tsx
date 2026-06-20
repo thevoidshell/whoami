@@ -4,9 +4,7 @@ import {
     FaFilePdf,
 } from "react-icons/fa";
 
-import {
-    MdEmail,
-} from "react-icons/md";
+import { MdEmail } from "react-icons/md";
 
 import { socials } from "@/data/socials";
 
@@ -32,7 +30,7 @@ const contacts = [
     },
     {
         href: "/resume.pdf",
-        label: "Resume PDF",
+        label: "Resume",
         icon: FaFilePdf,
         external: true,
     },
@@ -58,6 +56,7 @@ export default function ContactRail() {
 
                         return (
                             <li key={contact.label}>
+
                                 <a
                                     href={contact.href}
                                     target={
@@ -73,16 +72,56 @@ export default function ContactRail() {
                                     aria-label={contact.label}
                                     title={contact.label}
                                     className="
+                                        group
+                                        flex
+                                        items-center
+                                        justify-end
+                                        gap-3
                                         text-subtle
                                         hover:text-foreground
                                         transition-colors
-                                        duration-200
+                                        duration-300
                                     "
                                 >
-                                    <Icon
-                                        size={20}
-                                    />
+
+                                    {/* Hover label */}
+                                    <span
+                                        className="
+                                            font-mono
+                                            text-xs
+                                            uppercase
+                                            tracking-[0.25em]
+                                            whitespace-nowrap
+
+                                            opacity-0
+                                            translate-x-3
+
+                                            transition-all
+                                            duration-300
+
+                                            pointer-events-none
+
+                                            group-hover:opacity-100
+                                            group-hover:translate-x-0
+                                        "
+                                    >
+                                        {contact.label}
+                                    </span>
+
+
+                                    {/* Icon */}
+                                    <span
+                                        className="
+                                            transition-transform
+                                            duration-300
+                                            group-hover:scale-110
+                                        "
+                                    >
+                                        <Icon size={18} />
+                                    </span>
+
                                 </a>
+
                             </li>
                         );
                     })}
