@@ -49,7 +49,7 @@ export default async function HomeSection() {
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="#work">View Work</Button>
 
-            <Button href="#resume">Resume</Button>
+            <Button href="#contact">Resume</Button>
 
             <Button href={socials.github} external>
               GitHub
