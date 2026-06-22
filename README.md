@@ -1,4 +1,4 @@
-# thevoidshell Portfolio
+# whoami
 
 A modern cybersecurity portfolio built with Next.js that automatically synchronizes projects, technical focus areas, and technology stacks directly from GitHub.
 
@@ -85,8 +85,8 @@ Programming languages are aggregated using GitHub language statistics across por
 Clone the repository:
 
 ```bash
-git clone https://github.com/thevoidshell/portfolio.git
-cd portfolio
+git clone https://github.com/thevoidshell/whoami.git
+cd whoami
 ```
 
 Install dependencies:
@@ -143,10 +143,10 @@ Production environment variables should be configured through the Vercel dashboa
 
 ## Design Philosophy
 
-This portfolio is built around a simple principle:
+`whoami` is built around a simple idea:
 
 > Your GitHub should be your technical timeline.
 
-Repositories represent projects, repository topics represent areas of expertise, and code activity reflects growth over time.
+Repositories represent projects. Topics represent areas of expertise. Commits represent growth.
 
-The portfolio simply visualizes that ecosystem.
+The answer to `whoami` should evolve as you do.
