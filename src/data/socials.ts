@@ -1,7 +1,9 @@
 export const socials = {
-  github: "https://github.com/thevoidshell",
+    github: process.env.NEXT_PUBLIC_GITHUB ?? "https://github.com/yourusername",
 
-  linkedin: "https://www.linkedin.com/in/rachel-gupta-rg2004",
+    linkedin: process.env.NEXT_PUBLIC_LINKEDIN ?? "https://linkedin.com/in/your-profile",
 
-  email: "mailto:ray.gupta2004@gmail.com",
+    email: process.env.NEXT_PUBLIC_EMAIL ?? "your.email@example.com",
+
+    resume: process.env.NEXT_PUBLIC_RESUME_URL ?? "https://example.com/resume.pdf",
 } as const;

@@ -23,13 +23,13 @@ const contacts = [
         external: true,
     },
     {
-        href: socials.email,
+        href:  `mailto:${socials.email}`,
         label: "Email",
         icon: MdEmail,
         external: false,
     },
     {
-        href: "/resume.pdf",
+        href: socials.resume,
         label: "Resume",
         icon: FaFilePdf,
         external: true,

@@ -37,6 +37,19 @@ export const metadata: Metadata = {
   title: "Rachel Gupta",
   description:
     "Computer Information Systems student exploring cybersecurity through infrastructure labs, malware analysis, AI, and security research.",
+  other: {
+    "x-curiosity": `
+            Hi.
+            
+            You inspected the source.
+            
+            Good.
+            
+            Curiosity is a useful habit.
+            
+            - Rachel
+        `,
+  },
 };
 
 

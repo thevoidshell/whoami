@@ -5,8 +5,8 @@ export default function ContactSection() {
     const contacts = [
         {
             label: "Email",
-            value: socials.email.replace("mailto:", ""),
-            href: socials.email,
+            value: socials.email,
+            href: `mailto:${socials.email}`,
             external: false,
         },
         {
@@ -70,7 +70,7 @@ export default function ContactSection() {
                 </div>
 
                 <div className="mt-12">
-                    <Button href="/resume.pdf" external>
+                    <Button href={socials.resume} external>
                         Download Resume PDF
                     </Button>
                 </div>

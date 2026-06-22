@@ -1,17 +1,6 @@
 export const profile = {
-    name: "Rachel Gupta",
+    name: process.env.NEXT_PUBLIC_NAME ?? "Your Name",
 
-    title: "Systems • Security • AI",
+    title: process.env.NEXT_PUBLIC_TITLE ?? "Systems • Security • AI",
 
-    focus: [
-        "Offensive Security",
-        "Infrastructure Security",
-        "Security Engineering",
-    ],
-
-    currentlyBuilding: [
-        "Sentinel",
-        "Athena",
-        "Alexandria",
-    ],
 } as const;
