@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getWebsiteRepository } from "@/lib/github";
-import { useState, useEffect } from "react";
 
 export default async function Footer() {
     const repo = await getWebsiteRepository();
@@ -16,13 +15,6 @@ export default async function Footer() {
         : null;
 
     const repoUrl = repo?.html_url;
-
-    const [lightMode, setLightMode] = useState(false);
-
-    useEffect(() => {
-        const isLight = document.documentElement.classList.contains("light");
-        setLightMode(isLight);
-    }, []);
 
     return (
         <footer className="border-t border-border">
@@ -55,7 +47,7 @@ export default async function Footer() {
                             Language
                         </p>
                         <p>
-                            {repo?.languages
+                            {repo?.languages && Object.keys(repo.languages).length > 0
                                 ? Object.entries(repo.languages)
                                     .sort((a, b) => b[1] - a[1])[0]?.[0]
                                 : "—"}
@@ -70,14 +62,14 @@ export default async function Footer() {
                     </div>
                 </div>
 
-                {/* QR */}
+                {/* QR Container (Desktop) */}
                 <div className="border-l border-border flex items-center justify-center">
                     <Image
-                        src={lightMode ? "/qr/qr-light.svg" : "/qr/qr-dark.svg"}
+                        src="/qr/qr.svg"
                         alt="QR code"
                         width={96}
                         height={96}
-                        className="select-none"
+                        className="select-none transition-all duration-300 dark:invert [.light_&]:invert-0"
                     />
                 </div>
             </div>
@@ -98,7 +90,7 @@ export default async function Footer() {
                             Language
                         </p>
                         <p>
-                            {repo?.languages
+                            {repo?.languages && Object.keys(repo.languages).length > 0
                                 ? Object.entries(repo.languages)
                                     .sort((a, b) => b[1] - a[1])[0]?.[0]
                                 : "—"}
