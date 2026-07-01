@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getWebsiteRepository } from "@/lib/github";
+import { useState, useEffect } from "react";
 
 export default async function Footer() {
     const repo = await getWebsiteRepository();
@@ -15,6 +16,13 @@ export default async function Footer() {
         : null;
 
     const repoUrl = repo?.html_url;
+
+    const [lightMode, setLightMode] = useState(false);
+
+    useEffect(() => {
+        const isLight = document.documentElement.classList.contains("light");
+        setLightMode(isLight);
+    }, []);
 
     return (
         <footer className="border-t border-border">
@@ -65,7 +73,7 @@ export default async function Footer() {
                 {/* QR */}
                 <div className="border-l border-border flex items-center justify-center">
                     <Image
-                        src="/qr/qr-dark.svg"
+                        src={lightMode ? "/qr/qr-light.svg" : "/qr/qr-dark.svg"}
                         alt="QR code"
                         width={96}
                         height={96}
