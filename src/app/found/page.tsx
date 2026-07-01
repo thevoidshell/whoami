@@ -6,7 +6,7 @@ export default function FoundEasterEggPage() {
 
             {/* Top Metadata Header */}
             <div className="border-b border-border pb-4 flex justify-between items-center font-mono text-xs uppercase tracking-[0.25em] text-subtle">
-                <div>Record // Object-002</div>
+                <div>Record // Object-XXX</div>
                 <div className="flex items-center gap-2">
                     <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     <span>Status: Unindexed</span>
