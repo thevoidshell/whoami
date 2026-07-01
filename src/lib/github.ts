@@ -9,35 +9,37 @@ export interface Repository {
     languages: Record<string, number>;
 }
 
+// GitHub API repo type (partial raw response)
+type GitHubRepoResponse = Omit<Repository, "languages">;
 
-const githubFetchOptions = {
+const githubFetchOptions: RequestInit = {
     headers: {
         Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        ...(process.env.GITHUB_TOKEN
+            ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
+            : {}),
     },
     next: {
         revalidate: 3600,
-    },
+    } as any,
 };
-
 
 let cachedRepositories: Promise<Repository[]> | null = null;
 
-
-function getPortfolioRepositories(
-    repositories: Repository[]
-): Repository[] {
-    return repositories.filter((repository) =>
-        repository.topics.includes("thevoidshell")
+function getPortfolioRepositories(repositories: Repository[]): Repository[] {
+    return repositories.filter((repo) =>
+        repo.topics?.includes("thevoidshell")
     );
 }
 
+function getWebsiteRepositories(repositories: Repository[]): Repository[] {
+    return repositories.filter((repo) =>
+        repo.topics?.includes("thewebsite")
+    );
+}
 
 export async function getRepos(): Promise<Repository[]> {
-    if (cachedRepositories) {
-        return cachedRepositories;
-    }
-
+    if (cachedRepositories) return cachedRepositories;
 
     cachedRepositories = (async () => {
         const repositoryResponse = await fetch(
@@ -45,95 +47,59 @@ export async function getRepos(): Promise<Repository[]> {
             githubFetchOptions
         );
 
-
         if (!repositoryResponse.ok) {
-            throw new Error(
-                "Failed to fetch GitHub repositories"
-            );
+            throw new Error("Failed to fetch GitHub repositories");
         }
 
-
         const repositories =
-            (await repositoryResponse.json()) as Repository[];
+            (await repositoryResponse.json()) as GitHubRepoResponse[];
 
-
-        const repositoriesWithLanguages = await Promise.all(
+        const repositoriesWithLanguages: Repository[] = await Promise.all(
             repositories.map(async (repository) => {
                 const languageResponse = await fetch(
                     repository.languages_url,
                     githubFetchOptions
                 );
 
+                let languages: Record<string, number> = {};
 
-                if (!languageResponse.ok) {
-                    return {
-                        ...repository,
-                        languages: {},
-                    };
+                if (languageResponse.ok) {
+                    languages = await languageResponse.json();
                 }
-
-
-                const languageStatistics =
-                    await languageResponse.json();
-
 
                 return {
                     ...repository,
-                    languages: languageStatistics,
+                    languages,
                 };
             })
         );
 
-
         return repositoriesWithLanguages;
     })();
-
 
     return cachedRepositories;
 }
 
-
 export async function getPortfolioTopics(): Promise<string[]> {
     const repositories = await getRepos();
-
-    const portfolioRepositories =
-        getPortfolioRepositories(repositories);
-
+    const portfolioRepositories = getPortfolioRepositories(repositories);
 
     const topicScores = new Map<string, number>();
 
-
-    portfolioRepositories.forEach((repository) => {
+    portfolioRepositories.forEach((repo) => {
         const daysSinceUpdate =
-            (
-                Date.now() -
-                new Date(repository.updated_at).getTime()
-            ) /
+            (Date.now() - new Date(repo.updated_at).getTime()) /
             (1000 * 60 * 60 * 24);
-
 
         let recencyWeight = 1;
 
+        if (daysSinceUpdate <= 30) recencyWeight = 5;
+        else if (daysSinceUpdate <= 90) recencyWeight = 4;
+        else if (daysSinceUpdate <= 180) recencyWeight = 3;
+        else if (daysSinceUpdate <= 365) recencyWeight = 2;
 
-        if (daysSinceUpdate <= 30) {
-            recencyWeight = 5;
-        } else if (daysSinceUpdate <= 90) {
-            recencyWeight = 4;
-        } else if (daysSinceUpdate <= 180) {
-            recencyWeight = 3;
-        } else if (daysSinceUpdate <= 365) {
-            recencyWeight = 2;
-        }
-
-
-        repository.topics.forEach((topic) => {
-            if (
-                topic === "thevoidshell" ||
-                topic === "featured"
-            ) {
-                return;
-            }
-
+        repo.topics.forEach((topic) => {
+            if (topic === "thevoidshell" || topic === "featured") return;
 
             topicScores.set(
                 topic,
@@ -142,39 +108,39 @@ export async function getPortfolioTopics(): Promise<string[]> {
         });
     });
 
-
     return [...topicScores.entries()]
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10)
         .map(([topic]) => topic);
 }
 
-
 export async function getTechStack(): Promise<string[]> {
     const repositories = await getRepos();
-
-    const portfolioRepositories =
-        getPortfolioRepositories(repositories);
-
+    const portfolioRepositories = getPortfolioRepositories(repositories);
 
     const languageTotals = new Map<string, number>();
 
-
-    portfolioRepositories.forEach((repository) => {
-        Object.entries(repository.languages).forEach(
-            ([language, bytes]) => {
-                languageTotals.set(
-                    language,
-                    (languageTotals.get(language) ?? 0) +
-                    bytes
-                );
-            }
-        );
+    portfolioRepositories.forEach((repo) => {
+        Object.entries(repo.languages || {}).forEach(([lang, bytes]) => {
+            languageTotals.set(
+                lang,
+                (languageTotals.get(lang) ?? 0) + bytes
+            );
+        });
     });
-
 
     return [...languageTotals.entries()]
         .sort((a, b) => b[1] - a[1])
         .slice(0, 10)
-        .map(([language]) => language);
+        .map(([lang]) => lang);
+}
+
+export async function getWebsiteRepository(): Promise<Repository | null> {
+    const repos = await getRepos();
+
+    const websiteRepo = repos.find((repo) =>
+        repo.topics?.includes("thewebsite")
+    );
+
+    return websiteRepo ?? null;
 }

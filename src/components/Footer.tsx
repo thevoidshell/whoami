@@ -1,78 +1,119 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getWebsiteRepository } from "@/lib/github";
 
-export default function Footer() {
+export default async function Footer() {
+    const repo = await getWebsiteRepository();
+
+    const description = repo?.description;
+
+    const updatedDate = repo?.updated_at
+        ? new Date(repo.updated_at).toLocaleDateString("en-US", {
+            month: "short",
+            year: "numeric",
+        })
+        : null;
+
+    const repoUrl = repo?.html_url;
+
     return (
-        <footer className="border-t border-border px-6 md:px-12 py-12">
-            <div
-                className="
-                    grid
-                    gap-12
-                    items-start
-
-                    lg:grid-cols-[1.6fr_auto_auto]
-                "
-            >
+        <footer className="border-t border-border">
+            <div className="hidden lg:grid grid-cols-[1.8fr_220px_140px] items-stretch">
                 {/* Left */}
-
-                <div className="max-w-md">
-                    <h2 className="font-serif text-2xl font-semibold mb-4">
+                <div className="px-8 py-6">
+                    <h2 className="font-serif text-xl font-semibold mb-3">
                         whoami
                     </h2>
 
-                    <p className="text-muted leading-relaxed mb-2">
-                        The repository behind this archive.
+                    <p className="text-muted leading-relaxed">
+                        {description ?? "Repository metadata unavailable"}
                     </p>
 
-                    <p className="text-muted leading-relaxed mb-8">
-                        nothing here is random
-                    </p>
-
-                    <Link
-                        href="#"
-                        className="
-                            inline-flex
-                            items-center
-                            text-sm
-                            transition-colors
-                            hover:text-foreground
-                        "
-                    >
-                        View Source →
-                    </Link>
+                    {repoUrl && (
+                        <Link
+                            href={repoUrl}
+                            target="_blank"
+                            className="inline-block mt-6 text-sm transition-colors hover:text-foreground"
+                        >
+                            View Source →
+                        </Link>
+                    )}
                 </div>
 
                 {/* Metadata */}
-
-                <div className="space-y-8">
-                    <div>
-                        <p className="font-mono text-xs uppercase tracking-[0.15em] text-subtle mb-2">
+                <div className="border-l border-border grid grid-rows-2">
+                    <div className="px-6 py-5 border-b border-border flex flex-col justify-center">
+                        <p className="font-mono text-xs uppercase tracking-[0.15em] text-subtle mb-1">
                             Language
                         </p>
-
-                        <p>TypeScript</p>
+                        <p>
+                            {repo?.languages
+                                ? Object.entries(repo.languages)
+                                    .sort((a, b) => b[1] - a[1])[0]?.[0]
+                                : "—"}
+                        </p>
                     </div>
 
-                    <div>
-                        <p className="font-mono text-xs uppercase tracking-[0.15em] text-subtle mb-2">
+                    <div className="px-6 py-5 flex flex-col justify-center">
+                        <p className="font-mono text-xs uppercase tracking-[0.15em] text-subtle mb-1">
                             Revised
                         </p>
-
-                        <p>Jul 2026</p>
+                        <p>{updatedDate ?? "—"}</p>
                     </div>
                 </div>
 
                 {/* QR */}
-
-                <div className="hidden lg:flex items-center justify-end">
+                <div className="border-l border-border flex items-center justify-center">
                     <Image
                         src="/qr/qr-dark.svg"
                         alt="QR code"
-                        width={104}
-                        height={104}
+                        width={96}
+                        height={96}
                         className="select-none"
                     />
                 </div>
+            </div>
+
+            {/* Mobile */}
+            <div className="lg:hidden px-6 py-8">
+                <h2 className="font-serif text-xl font-semibold mb-3">
+                    whoami
+                </h2>
+
+                <p className="text-muted leading-relaxed">
+                    {description ?? "Repository metadata unavailable"}
+                </p>
+
+                <div className="flex gap-10 mb-6 mt-6">
+                    <div>
+                        <p className="font-mono text-xs uppercase tracking-[0.15em] text-subtle mb-1">
+                            Language
+                        </p>
+                        <p>
+                            {repo?.languages
+                                ? Object.entries(repo.languages)
+                                    .sort((a, b) => b[1] - a[1])[0]?.[0]
+                                : "—"}
+                        </p>
+                    </div>
+
+                    <div>
+                        <p className="font-mono text-xs uppercase tracking-[0.15em] text-subtle mb-1">
+                            Revised
+                        </p>
+                        <p>{updatedDate ?? "—"}</p>
+                    </div>
+                </div>
+
+                {repoUrl && (
+                    <Link
+                        href={repoUrl}
+                        target="_blank"
+                        className="text-sm transition-colors hover:text-foreground"
+                    >
+                        View Source →
+                    </Link>
+                )}
             </div>
         </footer>
     );
