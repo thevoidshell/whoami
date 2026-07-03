@@ -64,13 +64,20 @@ export default async function Footer() {
 
                 {/* QR Container (Desktop) */}
                 <div className="border-l border-border flex items-center justify-center">
-                    <Image
-                        src="/qr/qr.svg"
-                        alt="QR code"
-                        width={96}
-                        height={96}
-                        className="select-none transition-all duration-300 dark:invert [.light_&]:invert-0"
-                    />
+                    <Link
+                        href="https://portfolio-gamma-black-0lhq6t7nod.vercel.app/found"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Found page"
+                    >
+                        <Image
+                            src="/qr/qr.svg"
+                            alt="QR code"
+                            width={96}
+                            height={96}
+                            className="select-none transition-all duration-300 dark:invert [.light_&]:invert-0 cursor-pointer"
+                        />
+                    </Link>
                 </div>
             </div>
 
